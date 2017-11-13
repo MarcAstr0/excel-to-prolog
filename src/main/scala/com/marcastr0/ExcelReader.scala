@@ -1,7 +1,7 @@
 package com.marcastr0
 
 import org.apache.poi.xssf.usermodel.{XSSFCell, XSSFSheet, XSSFWorkbook}
-import org.apache.poi.ss.usermodel.Cell.{CELL_TYPE_NUMERIC, CELL_TYPE_STRING}
+import org.apache.poi.ss.usermodel.Cell.CELL_TYPE_STRING
 
 object ExcelReader {
 
@@ -12,11 +12,11 @@ object ExcelReader {
     sheets.toList
   }
 
-  def getSheetHeaders(sheet: XSSFSheet): List[XSSFCell] = {
+  def getSheetHeaders(sheet: XSSFSheet): List[String] = {
     val headers = sheet.getRow(0)
     val cells = for {
       i <- 0 until headers.getPhysicalNumberOfCells
-    } yield headers.getCell(i)
+    } yield headers.getCell(i).toString
     cells.toList
   }
 

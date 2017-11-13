@@ -20,15 +20,15 @@ class ExcelReaderSpec extends FlatSpec {
   "getSheetHeaders" should "return the header cells of the sheet" in {
     val sheets = ExcelReader.getSheets(workbook)
     assert(
-      ExcelReader.getSheetHeaders(sheets.head).map(cell => cell.toString)
+      ExcelReader.getSheetHeaders(sheets.head)
         == List("parentName", "childName")
     )
     assert(
-      ExcelReader.getSheetHeaders(sheets(1)).map(cell => cell.toString)
+      ExcelReader.getSheetHeaders(sheets(1))
         == List("name")
     )
     assert(
-      ExcelReader.getSheetHeaders(sheets(2)).map(cell => cell.toString)
+      ExcelReader.getSheetHeaders(sheets(2))
         == List("name")
     )
   }
