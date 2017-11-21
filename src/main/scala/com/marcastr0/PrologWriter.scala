@@ -7,7 +7,8 @@ object PrologWriter {
   }
 
   def writeFact(name: String, atoms: List[Any]): String = {
-    prologFriendly(name) + "(" + atoms.mkString(",") + ")."
+    val quotedStrings = atoms map {a => if (a.toString == "_" || isNumeric(a.toString)) a else "\"" + a + "\""}
+    prologFriendly(name) + "(" + quotedStrings.mkString(",") + ")."
   }
 
   /**
@@ -18,4 +19,14 @@ object PrologWriter {
     val stringList = string.split(" ").toList
     (stringList.head ++ stringList.tail.map(_.capitalize)).mkString("")
   }
+
+  def isNumeric(str: String): Boolean = {
+    !throwsNumberFormatException(str.toLong) || !throwsNumberFormatException(str.toDouble)
+  }
+
+  def throwsNumberFormatException(f: => Any): Boolean = {
+    try { f; false } catch { case e: NumberFormatException => true }
+  }
 }
+
+

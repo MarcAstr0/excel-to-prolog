@@ -9,7 +9,9 @@ class PrologWriterSpec extends FlatSpec {
   }
 
   "writeFact" should "write a Prolog base clause or fact" in {
-    assert(PrologWriter.writeFact("parent", List("david", "john")) == "parent(david,john).")
+    assert(PrologWriter.writeFact("parent", List("david", "john")) == "parent(\"david\",\"john\").")
+    assert(PrologWriter.writeFact("parent", List("david", "_")) == "parent(\"david\",_).")
+    assert(PrologWriter.writeFact("some predicate", List("david", "_", 1.0)) == "somePredicate(\"david\",_,1.0).")
   }
 
   "prologFriendly" should "convert a string to comply with Prolog conventions for predicates" in {

@@ -13,8 +13,8 @@ class ExcelToPrologSpec extends FlatSpec {
   "createKnowledgeBase" should "create a knowledge base of facts" in {
     assert(ExcelToProlog.createKnowledgeBase(sheets.head) ==
       """|% parent(parentName,childName).
-        |parent(david,john).
-        |parent(john,eliza).
-        |parent(suzie,eliza).""".stripMargin)
+        |parent("david","john").
+        |parent("john","eliza").
+        |parent("suzie","eliza").""".stripMargin)
   }
 }
