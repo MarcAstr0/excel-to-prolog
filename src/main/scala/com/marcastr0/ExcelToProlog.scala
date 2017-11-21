@@ -14,7 +14,7 @@ object ExcelToProlog {
       val workbook = new XSSFWorkbook(fileStream)
       val sheets = ExcelReader.getSheets(workbook)
       for (sheet <- sheets) {
-        val writer = new PrintWriter(new File(sheet.getSheetName + ".pl"))
+        val writer = new PrintWriter(new File(PrologWriter.prologFriendly(sheet.getSheetName) + ".pl"))
         writer.write(createKnowledgeBase(sheet))
         writer.close()
       }
