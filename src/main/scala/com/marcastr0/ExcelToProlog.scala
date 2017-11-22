@@ -24,7 +24,7 @@ object ExcelToProlog {
   def createKnowledgeBase(sheet: XSSFSheet): String = {
     val header = PrologWriter.writeExplanation(sheet.getSheetName, ExcelReader.getSheetHeaders(sheet)) + "\n"
     val rows = ExcelReader.getRows(sheet) map {
-      row => PrologWriter.writeFact(sheet.getSheetName, row)
+      row => PrologWriter.writeClause(sheet.getSheetName, row)
     }
     header + rows.mkString("\n")
   }

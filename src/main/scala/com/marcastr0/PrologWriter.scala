@@ -2,18 +2,30 @@ package com.marcastr0
 
 object PrologWriter {
 
-  def writeExplanation(name: String, vars: List[String]): String = {
-    "% " + prologFriendly(name) + "(" + vars.mkString(",") + ")."
+  /**
+    * Writes a commented Prolog clause with the predicate and the arguments for that clause
+    * @param predicate the predicate name
+    * @param arguments a list of argument names
+    * @return
+    */
+  def writeExplanation(predicate: String, arguments: List[String]): String = {
+    "% " + prologFriendly(predicate) + "(" + arguments.mkString(",") + ")."
   }
 
-  def writeFact(name: String, atoms: List[Any]): String = {
-    val quotedStrings = atoms map {a => if (a.toString == "_" || isNumeric(a.toString)) a else "\"" + a + "\""}
-    prologFriendly(name) + "(" + quotedStrings.mkString(",") + ")."
+  /**
+    * Writes a Prolog clause
+    * @param predicate the predicate name
+    * @param arguments a list of arguments
+    * @return
+    */
+  def writeClause(predicate: String, arguments: List[Any]): String = {
+    val quotedStrings = arguments map { a => if (a.toString == "_" || isNumeric(a.toString)) a else "\"" + a + "\""}
+    prologFriendly(predicate) + "(" + quotedStrings.mkString(",") + ")."
   }
 
   /**
     * Converts to a Prolog friendly camel-cased string and removes special characters
-    * @param string
+    * @param string the string we want to convert
     */
   def prologFriendly(string: String): String = {
     val stringList = string.split(" ").toList
