@@ -6,7 +6,7 @@ object PrologWriter {
     * Writes a commented Prolog clause with the predicate and the arguments for that clause
     * @param predicate the predicate name
     * @param arguments a list of argument names
-    * @return
+    * @return a string with the clause
     */
   def writeExplanation(predicate: String, arguments: List[String]): String = {
     "% " + prologFriendly(predicate) + "(" + arguments.mkString(",") + ")."
@@ -16,7 +16,7 @@ object PrologWriter {
     * Writes a Prolog clause
     * @param predicate the predicate name
     * @param arguments a list of arguments
-    * @return
+    * @return a string with the clause
     */
   def writeClause(predicate: String, arguments: List[Any]): String = {
     val quotedStrings = arguments map { a => if (a.toString == "_" || isNumeric(a.toString)) a else "\"" + a + "\""}
@@ -26,6 +26,7 @@ object PrologWriter {
   /**
     * Converts to a Prolog friendly camel-cased string and removes special characters
     * @param string the string we want to convert
+    * @return the converted string
     */
   def prologFriendly(string: String): String = {
     val stringList = string.split(" ").toList
